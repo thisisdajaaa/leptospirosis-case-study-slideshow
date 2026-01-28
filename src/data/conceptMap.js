@@ -53,7 +53,7 @@ export const nodes = [
   { id: 'norepinephrine', text: 'NE 20 cc/hr (AD 0.85)', type: nodeTypes.TREATMENT, x: 382, y: 1143 },
   { id: 'bpNormal', text: 'BP 130/80', type: nodeTypes.PATIENT, x: 725, y: 1219 },
   { id: 'severeLeptospirosis', text: 'SEVERE LEPTOSPIROSIS', type: nodeTypes.CONDITION, x: 515, y: 1748 },
-  { id: 'ceftriaxone', text: 'CEFTRIAXONE 1G IV Q24H', type: nodeTypes.TREATMENT, x: 844, y: 1760 },
+  { id: 'ceftriaxone', text: 'CEFTRIAXONE 2G IV Q24H', type: nodeTypes.TREATMENT, x: 844, y: 1760 },
   { id: 'organEffects', text: 'ORGAN SYSTEM EFFECTS', type: nodeTypes.LAB, x: 479, y: 1956 },
   { id: 'liver', text: 'LIVER', type: nodeTypes.ORGAN, x: -230, y: 2108 },
   { id: 'kidneys', text: 'KIDNEYS', type: nodeTypes.ORGAN, x: 516, y: 2113 },
