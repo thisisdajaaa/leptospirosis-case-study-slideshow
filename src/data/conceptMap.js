@@ -55,25 +55,27 @@ export const nodes = [
   { id: 'severeLeptospirosis', text: 'SEVERE LEPTOSPIROSIS', type: nodeTypes.CONDITION, x: 515, y: 1748 },
   { id: 'ceftriaxone', text: 'CEFTRIAXONE 2G IV Q24H', type: nodeTypes.TREATMENT, x: 844, y: 1760 },
   { id: 'organEffects', text: 'ORGAN SYSTEM EFFECTS', type: nodeTypes.LAB, x: 479, y: 1956 },
-  { id: 'liver', text: 'LIVER', type: nodeTypes.ORGAN, x: -230.00000000000006, y: 2108 },
-  { id: 'kidneys', text: 'KIDNEYS', type: nodeTypes.ORGAN, x: 1246.286315546254, y: 2100.632408745463 },
+  { id: 'liver', text: 'LIVER', type: nodeTypes.ORGAN, x: -230.00000000000003, y: 2108 },
+  { id: 'kidneys', text: 'KIDNEYS', type: nodeTypes.ORGAN, x: 516, y: 2113 },
+  { id: 'lungs', text: 'LUNGS', type: nodeTypes.ORGAN, x: 1444.6, y: 2108 },
   { id: 'coagulopathy', text: 'COAGULOPATHY', type: nodeTypes.SYMPTOM, x: -568, y: 2278 },
-  { id: 'hyperbilirubinemia', text: 'HYPERBILIRUBINEMIA', type: nodeTypes.SYMPTOM, x: -166.00000000000006, y: 2275 },
+  { id: 'hyperbilirubinemia', text: 'HYPERBILIRUBINEMIA', type: nodeTypes.SYMPTOM, x: -166.00000000000003, y: 2275 },
   { id: 'pt', text: 'PT 23.3', type: nodeTypes.LAB, x: -564, y: 2362 },
   { id: 'aptt', text: 'APTT 43.3', type: nodeTypes.LAB, x: -564, y: 2454 },
-  { id: 'jaundice', text: 'JAUNDICE', type: nodeTypes.LAB, x: -274.99999999999994, y: 2362 },
-  { id: 'ictericSclerae', text: 'ICTERIC SCLERAE', type: nodeTypes.LAB, x: -278.17642985950346, y: 2458.024884013204 },
-  { id: 'tb', text: 'TB 3.73', type: nodeTypes.LAB, x: -64.24984843378485, y: 2453.500058452277 },
-  { id: 'db', text: 'DB 2.73', type: nodeTypes.LAB, x: -64.6584266307953, y: 2364.000013047429 },
-  { id: 'ib', text: 'IB 1.38', type: nodeTypes.LAB, x: -63.582884137230224, y: 2541.043158054198 },
-  { id: 'aki', text: 'AKI', type: nodeTypes.CONDITION, x: 991.9987229787946, y: 2426.7248192062107 },
-  { id: 'hypokalemia', text: 'HYPOKALEMIA', type: nodeTypes.CONDITION, x: 1487.8254222006476, y: 2429.3083342856607 },
-  { id: 'crea', text: 'Crea 3.33', type: nodeTypes.LAB, x: 718.6042650030936, y: 2548.603452889959 },
-  { id: 'fluidHydration', text: 'FLUID HYDRATION STRICT I AND O MONITORING', type: nodeTypes.TREATMENT, x: 758.1481353953671, y: 2649.355756566206 },
-  { id: 'nahco3', text: 'NaHCO3 tab', type: nodeTypes.TREATMENT, x: 1169.0299562833882, y: 2663.091638580885 },
-  { id: 'k', text: 'K 2.70', type: nodeTypes.LAB, x: 1683.1524690432536, y: 2553.227656143024 },
-  { id: 'kcl', text: 'KCL DRIP', type: nodeTypes.TREATMENT, x: 1569.6465315199714, y: 2639.36416918954 },
-];
+  { id: 'jaundice', text: 'JAUNDICE', type: nodeTypes.LAB, x: -275, y: 2362 },
+ { id: 'ictericSclerae', text: 'ICTERIC SCLERAE', type: nodeTypes.LAB, x: -278.1764298595034, y: 2458.024884013204 },
+ { id: 'tb', text: 'TB 3.73', type: nodeTypes.LAB, x: -64.24984843378482, y: 2453.500058452277 },
+ { id: 'db', text: 'DB 2.73', type: nodeTypes.LAB, x: -64.65842663079528, y: 2364.000013047429 },
+ { id: 'ib', text: 'IB 1.38', type: nodeTypes.LAB, x: -63.582884137230195, y: 2541.043158054198 },
+ { id: 'aki', text: 'AKI', type: nodeTypes.CONDITION, x: 377, y: 2437 },
+ { id: 'hypokalemia', text: 'HYPOKALEMIA', type: nodeTypes.CONDITION, x: 664, y: 2435 },
+ { id: 'crea', text: 'Crea 3.33', type: nodeTypes.LAB, x: 215, y: 2517 },
+ { id: 'fluidHydration', text: 'FLUID HYDRATION STRICT I AND O MONITORING', type: nodeTypes.TREATMENT, x: 212, y: 2700 },
+ { id: 'nahco3', text: 'NaHCO3 tab', type: nodeTypes.TREATMENT, x: 506, y: 2704 },
+ { id: 'k', text: 'K 2.70', type: nodeTypes.LAB, x: 873, y: 2520 },
+ { id: 'kcl', text: 'KCL DRIP', type: nodeTypes.TREATMENT, x: 777, y: 2667 },
+ { id: 'respiratoryAlkalosis', text: 'RESPIRATORY ALKALOSIS', type: nodeTypes.CONDITION, x: 1286, y: 2296 }
+]
 
 // Connections/Edges between nodes - defines the tree structure
 // Note: comorbidities has no connections, terminal nodes have no outgoing connections
@@ -125,7 +127,8 @@ export const connections = [
   // Level 9-10: Organ effects to three organs (horizontal branching)
   { from: 'organEffects', to: 'liver' },
   { from: 'organEffects', to: 'kidneys' },
-  
+  { from: 'organEffects', to: 'lungs' },
+  { from: 'lungs', to: 'respiratoryAlkalosis' },
   // Level 10-11a: Liver to effects (vertical alignment)
   { from: 'liver', to: 'coagulopathy' },
   { from: 'liver', to: 'hyperbilirubinemia' },
@@ -148,6 +151,8 @@ export const connections = [
   // Level 11b-12d: Hypokalemia details (vertical alignment)
   { from: 'hypokalemia', to: 'kcl' },
   // Note: kcl has no outgoing connections (terminal)
+  
+  // Level 10-11c: Lungs to effects (vertical alignment)
   // Note: respiratoryAlkalosis has no outgoing connections (terminal)
 ];
 
@@ -190,9 +195,10 @@ export const flowSequence = [
   
   // Step 9: Organ System Effects
   { nodes: ['organEffects'], connections: [['severeLeptospirosis', 'organEffects']] },
-  { nodes: ['liver', 'kidneys'], connections: [
+  { nodes: ['liver', 'kidneys', 'lungs'], connections: [
     ['organEffects', 'liver'],
     ['organEffects', 'kidneys'],
+    ['organEffects', 'lungs'],
   ]},
   
   // Step 10: Liver Effects
@@ -219,6 +225,8 @@ export const flowSequence = [
   ]},
   { nodes: ['crea'], connections: [['aki', 'crea']] },
   { nodes: ['k'], connections: [['hypokalemia', 'k']] },
+
+  { nodes: ['respiratoryAlkalosis'], connections: [['lungs', 'respiratoryAlkalosis']] },
   
   // Step 13-20: Treatment Nodes shown one by one
   { nodes: ['metoclopramide'], connections: [['vomiting', 'metoclopramide']] },
