@@ -33,25 +33,24 @@ export const nodeColors = {
 // X spacing: varies based on number of children with generous gaps
 export const nodes = [
   // Node positions updated with user-provided coordinates
-  { id: 'comorbidities', text: 'HCVD CD: AFIB IN RVR NON DIABETIC NON ASTHMATIC', type: nodeTypes.TREATMENT, x: 700, y: 50 },
+  { id: 'comorbidities', text: 'NON DIABETIC\nNON ASTHMATIC\nHCVD CD: AFIB IN RVR', type: nodeTypes.TREATMENT, x: 700, y: 50 },
   { id: 'patient', text: 'RT 46/M', type: nodeTypes.PATIENT, x: 500, y: 150 },
   { id: 'exposure', text: 'HX OF WADING IN FLOOD', type: nodeTypes.HISTORY, x: 477, y: 309 },
   { id: 'leptospira', text: 'LEPTOSPIRA SPECIES', type: nodeTypes.PATHOGEN, x: 500, y: 450 },
   { id: 'entry', text: 'CUTS/ABRADED SKIN/MUCOUS MEMBRANES', type: nodeTypes.MECHANISM, x: 500, y: 600 },
   { id: 'hematogenous', text: 'HEMATOGENOUS DISSEMINATION', type: nodeTypes.MECHANISM, x: -400, y: 750 },
-  { id: 'endothelial', text: 'ENDOTHELIAL INJURY', type: nodeTypes.MECHANISM, x: 520, y: 758 },
-  { id: 'immune', text: 'IMMUNE MEDIATED INJURY', type: nodeTypes.MECHANISM, x: 1399, y: 750 },
+  { id: 'endothelial', text: 'ENDOTHELIAL INJURY', type: nodeTypes.MECHANISM, x: 1399, y: 750 },
   { id: 'fever', text: 'FEVER', type: nodeTypes.SYMPTOM, x: -661, y: 903 },
   { id: 'vomiting', text: 'VOMITING', type: nodeTypes.SYMPTOM, x: -449, y: 903 },
   { id: 'lbm', text: 'LBM', type: nodeTypes.SYMPTOM, x: -225, y: 903 },
   { id: 'abdominalPain', text: 'ABDOMINAL PAIN', type: nodeTypes.SYMPTOM, x: 2, y: 906 },
   { id: 'metoclopramide', text: 'METOCLOPRAMIDE 10MG IVTT Q8H PRN', type: nodeTypes.TREATMENT, x: -630, y: 1056 },
   { id: 'baciflora', text: 'BACIFLORA 1AMP PO TID', type: nodeTypes.TREATMENT, x: -130, y: 1070 },
-  { id: 'septicShock', text: 'SEPTIC SHOCK', type: nodeTypes.SYMPTOM, x: 541, y: 860 },
-  { id: 'bpLow', text: 'BP 70/40', type: nodeTypes.PATIENT, x: 672, y: 1032 },
-  { id: 'pnss', text: '1000 ml PNSS', type: nodeTypes.TREATMENT, x: 390, y: 1040 },
-  { id: 'norepinephrine', text: 'NE 20 cc/hr (AD 0.85)', type: nodeTypes.TREATMENT, x: 382, y: 1143 },
-  { id: 'bpNormal', text: 'BP 130/80', type: nodeTypes.PATIENT, x: 725, y: 1219 },
+  { id: 'septicShock', text: 'SEPTIC SHOCK', type: nodeTypes.SYMPTOM, x: 1236.8387737508365, y: 886.9273077854824 },
+  { id: 'bpLow', text: 'BP 70/40', type: nodeTypes.PATIENT, x: 1181.0757975268382, y: 1053.8776764725083 },
+  { id: 'pnss', text: '1000 ml PNSS', type: nodeTypes.TREATMENT, x: 990.0079414510752, y: 945.1451636196949 },
+  { id: 'norepinephrine', text: 'NE 20 cc/hr (AD 0.85)', type: nodeTypes.TREATMENT, x: 969.6458241870972, y: 1041.0289921482774 },
+  { id: 'bpNormal', text: 'BP 130/80', type: nodeTypes.PATIENT, x: 1212.21060298575, y: 1193.6593747725997 },
   { id: 'severeLeptospirosis', text: 'SEVERE LEPTOSPIROSIS', type: nodeTypes.CONDITION, x: 515, y: 1748 },
   { id: 'ceftriaxone', text: 'CEFTRIAXONE 2G IV Q24H', type: nodeTypes.TREATMENT, x: 844, y: 1760 },
   { id: 'organEffects', text: 'ORGAN SYSTEM EFFECTS', type: nodeTypes.LAB, x: 479, y: 1956 },
@@ -92,8 +91,6 @@ export const connections = [
   // Level 4-5: Entry to three mechanisms (horizontal branching)
   { from: 'entry', to: 'hematogenous' },
   { from: 'entry', to: 'endothelial' },
-  { from: 'entry', to: 'immune' },
-  // Note: immune has no outgoing connections (terminal)
   
   // Level 5-6a: Hematogenous to symptoms (vertical alignment)
   { from: 'hematogenous', to: 'fever' },
@@ -120,7 +117,6 @@ export const connections = [
   // Level 8a: Only three main mechanisms connect to severe leptospirosis
   { from: 'hematogenous', to: 'severeLeptospirosis' },
   { from: 'endothelial', to: 'severeLeptospirosis' },
-  { from: 'immune', to: 'severeLeptospirosis' },
   
   // Level 8a-9: Severe leptospirosis to organ effects
   // Note: ceftriaxone has NO connection from severeLeptospirosis (positioned nearby but not connected)
@@ -174,7 +170,6 @@ export const flowSequence = [
   // Step 3: Pathogenesis Branching
   { nodes: ['hematogenous'], connections: [['entry', 'hematogenous']] },
   { nodes: ['endothelial'], connections: [['entry', 'endothelial']] },
-  { nodes: ['immune'], connections: [['entry', 'immune']] },
   
   // Step 4: Hematogenous Symptoms
   { nodes: ['fever', 'vomiting', 'lbm', 'abdominalPain'], connections: [
@@ -199,7 +194,6 @@ export const flowSequence = [
   { nodes: ['severeLeptospirosis'], connections: [
     ['hematogenous', 'severeLeptospirosis'],
     ['endothelial', 'severeLeptospirosis'],
-    ['immune', 'severeLeptospirosis'],
   ]},
   
   // Step 9: Organ System Effects

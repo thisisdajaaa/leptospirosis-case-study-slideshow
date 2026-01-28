@@ -256,7 +256,7 @@ const ConceptMapSlideshow = () => {
             }}
           />
         )}
-        <div style={{ textAlign: 'center', width: '100%' }}>
+        <div style={{ textAlign: 'center', width: '100%', whiteSpace: 'pre-line' }}>
           {data.label}
         </div>
       </motion.div>
