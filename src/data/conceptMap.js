@@ -37,12 +37,13 @@ export const nodes = [
   { id: 'patient', text: 'RT 46/M', type: nodeTypes.PATIENT, x: 500, y: 150 },
   { id: 'exposure', text: 'HX OF WADING IN FLOOD', type: nodeTypes.HISTORY, x: 477, y: 309 },
   { id: 'leptospira', text: 'LEPTOSPIRA SPECIES', type: nodeTypes.PATHOGEN, x: 500, y: 450 },
-  { id: 'entry', text: 'CUTS/ABRADED SKIN/MUCOUS MEMBRANES', type: nodeTypes.MECHANISM, x: 500, y: 600 },
+  { id: 'entry', text: 'CUTS/ABRADED SKIN/MUCOUS MEMBRANES', type: nodeTypes.MECHANISM, x: 494.2349530410711, y: 603.0454446477152 },
+  { id: 'openToeWound', text: 'open toe wound', type: nodeTypes.SYMPTOM, x: 750.4645847727516, y: 613.3883390534679 },
   { id: 'hematogenous', text: 'HEMATOGENOUS DISSEMINATION', type: nodeTypes.MECHANISM, x: -400, y: 750 },
   { id: 'endothelial', text: 'ENDOTHELIAL INJURY', type: nodeTypes.MECHANISM, x: 1399, y: 750 },
   { id: 'fever', text: 'FEVER', type: nodeTypes.SYMPTOM, x: -661, y: 903 },
   { id: 'vomiting', text: 'VOMITING', type: nodeTypes.SYMPTOM, x: -449, y: 903 },
-  { id: 'lbm', text: 'LBM', type: nodeTypes.SYMPTOM, x: -225, y: 903 },
+  { id: 'lbm', text: 'LBM', type: nodeTypes.SYMPTOM, x: -225.00000000000003, y: 903 },
   { id: 'abdominalPain', text: 'ABDOMINAL PAIN', type: nodeTypes.SYMPTOM, x: 2, y: 906 },
   { id: 'metoclopramide', text: 'METOCLOPRAMIDE 10MG IVTT Q8H PRN', type: nodeTypes.TREATMENT, x: -630, y: 1056 },
   { id: 'baciflora', text: 'BACIFLORA 1AMP PO TID', type: nodeTypes.TREATMENT, x: -130, y: 1070 },
@@ -54,18 +55,18 @@ export const nodes = [
   { id: 'severeLeptospirosis', text: 'SEVERE LEPTOSPIROSIS', type: nodeTypes.CONDITION, x: 515, y: 1748 },
   { id: 'ceftriaxone', text: 'CEFTRIAXONE 2G IV Q24H', type: nodeTypes.TREATMENT, x: 844, y: 1760 },
   { id: 'organEffects', text: 'ORGAN SYSTEM EFFECTS', type: nodeTypes.LAB, x: 479, y: 1956 },
-  { id: 'liver', text: 'LIVER', type: nodeTypes.ORGAN, x: -230, y: 2108 },
+  { id: 'liver', text: 'LIVER', type: nodeTypes.ORGAN, x: -230.00000000000003, y: 2108 },
   { id: 'kidneys', text: 'KIDNEYS', type: nodeTypes.ORGAN, x: 516, y: 2113 },
   { id: 'lungs', text: 'LUNGS', type: nodeTypes.ORGAN, x: 1444.6, y: 2108 },
   { id: 'coagulopathy', text: 'COAGULOPATHY', type: nodeTypes.SYMPTOM, x: -568, y: 2278 },
-  { id: 'hyperbilirubinemia', text: 'HYPERBILIRUBINEMIA', type: nodeTypes.SYMPTOM, x: -166, y: 2275 },
+  { id: 'hyperbilirubinemia', text: 'HYPERBILIRUBINEMIA', type: nodeTypes.SYMPTOM, x: -166.00000000000003, y: 2275 },
   { id: 'pt', text: 'PT 23.3', type: nodeTypes.LAB, x: -564, y: 2362 },
   { id: 'aptt', text: 'APTT 43.3', type: nodeTypes.LAB, x: -564, y: 2454 },
   { id: 'jaundice', text: 'JAUNDICE', type: nodeTypes.LAB, x: -275, y: 2362 },
-  { id: 'ictericSclerae', text: 'ICTERIC SCLERAE', type: nodeTypes.LAB, x: -81, y: 2363 },
-  { id: 'tb', text: 'TB 3.73', type: nodeTypes.LAB, x: -272, y: 2448 },
-  { id: 'db', text: 'DB 2.73', type: nodeTypes.LAB, x: -67, y: 2449 },
-  { id: 'ib', text: 'IB 1.38', type: nodeTypes.LAB, x: -165, y: 2542 },
+  { id: 'ictericSclerae', text: 'ICTERIC SCLERAE', type: nodeTypes.LAB, x: -278.1764298595034, y: 2458.024884013204 },
+  { id: 'tb', text: 'TB 3.73', type: nodeTypes.LAB, x: -64.24984843378482, y: 2453.500058452277 },
+  { id: 'db', text: 'DB 2.73', type: nodeTypes.LAB, x: -64.65842663079528, y: 2364.000013047429 },
+  { id: 'ib', text: 'IB 1.38', type: nodeTypes.LAB, x: -63.582884137230195, y: 2541.043158054198 },
   { id: 'aki', text: 'AKI', type: nodeTypes.CONDITION, x: 377, y: 2437 },
   { id: 'hypokalemia', text: 'HYPOKALEMIA', type: nodeTypes.CONDITION, x: 664, y: 2435 },
   { id: 'crea', text: 'Crea 3.33', type: nodeTypes.LAB, x: 215, y: 2517 },
@@ -87,6 +88,7 @@ export const connections = [
   
   // Level 3-4: Pathogen to entry
   { from: 'leptospira', to: 'entry' },
+  
   
   // Level 4-5: Entry to three mechanisms (horizontal branching)
   { from: 'entry', to: 'hematogenous' },
@@ -166,6 +168,7 @@ export const flowSequence = [
   // Step 2: Infection Entry
   { nodes: ['leptospira'], connections: [['exposure', 'leptospira']] },
   { nodes: ['entry'], connections: [['leptospira', 'entry']] },
+  { nodes: ['openToeWound'], connections: [['entry', 'openToeWound']] },
   
   // Step 3: Pathogenesis Branching
   { nodes: ['hematogenous'], connections: [['entry', 'hematogenous']] },
@@ -184,11 +187,6 @@ export const flowSequence = [
   
   // Step 6: BP Low
   { nodes: ['bpLow'], connections: [['septicShock', 'bpLow']] },
-  
-  // Step 7: BP Normal
-  { nodes: ['bpNormal'], connections: [
-    ['bpLow', 'bpNormal'],
-  ]},
   
   // Step 8: Severe Leptospirosis - only three mechanisms connect
   { nodes: ['severeLeptospirosis'], connections: [
@@ -237,6 +235,9 @@ export const flowSequence = [
   { nodes: ['baciflora'], connections: [['lbm', 'baciflora']] },
   { nodes: ['pnss'], connections: [] }, // pnss has no connections - positioned at side
   { nodes: ['norepinephrine'], connections: [] }, // norepinephrine has no connections - positioned at side
+  { nodes: ['bpNormal'], connections: [
+    ['bpLow', 'bpNormal'],
+  ]}, // BP Normal shown after PNSS and NE
   { nodes: ['ceftriaxone'], connections: [] }, // ceftriaxone has no connections
   { nodes: ['fluidHydration'], connections: [['crea', 'fluidHydration']] },
   { nodes: ['nahco3'], connections: [
