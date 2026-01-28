@@ -1,0 +1,133 @@
+/* React Flow Styles - must be first */
+@import 'reactflow/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* React Flow Edge Styles - Ensure edges are visible */
+.react-flow__edge {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.react-flow__edge-path {
+  stroke: #FFFFFF !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+  fill: none !important;
+  visibility: visible !important;
+}
+
+.react-flow__edge svg {
+  overflow: visible !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #FFFFFF !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.react-flow__arrowhead {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+.react-flow__arrowhead polyline {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+.react-flow__arrowhead polygon {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Ensure all edge elements are visible */
+.react-flow__edge .react-flow__edge-path {
+  stroke: #FFFFFF !important;
+  stroke-width: 2px !important;
+  opacity: 1 !important;
+  fill: none !important;
+  visibility: visible !important;
+}
+
+/* Ensure arrowheads are visible */
+.react-flow__edge .react-flow__arrowhead {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+.react-flow__edge .react-flow__arrowhead polygon {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+.react-flow__edge-text {
+  fill: #94A3B8;
+}
+
+/* Ensure SVG markers (arrowheads) are visible */
+.react-flow__edge marker {
+  overflow: visible !important;
+}
+
+.react-flow__edge marker path {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Ensure the entire edge SVG is visible */
+.react-flow__edges {
+  z-index: 1;
+}
+
+.react-flow__edge svg path {
+  stroke: #FFFFFF !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
