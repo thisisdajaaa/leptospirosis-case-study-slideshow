@@ -31,6 +31,29 @@ const ConceptMapSlideshow = () => {
   // State to track node positions for dragging
   const [nodePositions, setNodePositions] = useState({});
 
+  // Keyboard navigation with arrow keys
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Only handle arrow keys if not typing in an input field
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft' && !isFirstStep) {
+        event.preventDefault();
+        previousStep();
+      } else if (event.key === 'ArrowRight' && !isLastStep) {
+        event.preventDefault();
+        nextStep();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isFirstStep, isLastStep, previousStep, nextStep]);
+
   // Color mapping for node types
   const colorMap = {
     patient: '#3B82F6',      // blue-500
@@ -448,8 +471,8 @@ const ConceptMapSlideshow = () => {
         </ReactFlow>
       </div>
 
-      {/* Navigation Controls */}
-      <NavigationControls
+      {/* Navigation Controls - Hidden, using arrow keys instead */}
+      {/* <NavigationControls
         onPrevious={previousStep}
         onNext={nextStep}
         isFirstStep={isFirstStep}
@@ -457,7 +480,7 @@ const ConceptMapSlideshow = () => {
         currentStep={currentStep}
         totalSteps={totalSteps}
         progress={progress}
-      />
+      /> */}
     </div>
   );
 };
