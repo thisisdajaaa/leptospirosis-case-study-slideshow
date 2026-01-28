@@ -43,7 +43,7 @@ export const nodes = [
   { id: 'immune', text: 'IMMUNE MEDIATED INJURY', type: nodeTypes.MECHANISM, x: 1399, y: 750 },
   { id: 'fever', text: 'FEVER', type: nodeTypes.SYMPTOM, x: -661, y: 903 },
   { id: 'vomiting', text: 'VOMITING', type: nodeTypes.SYMPTOM, x: -449, y: 903 },
-  { id: 'lbm', text: 'LBM', type: nodeTypes.SYMPTOM, x: -172, y: 903 },
+  { id: 'lbm', text: 'LBM', type: nodeTypes.SYMPTOM, x: -225, y: 903 },
   { id: 'abdominalPain', text: 'ABDOMINAL PAIN', type: nodeTypes.SYMPTOM, x: 2, y: 906 },
   { id: 'metoclopramide', text: 'METOCLOPRAMIDE 10MG IVTT Q8H PRN', type: nodeTypes.TREATMENT, x: -630, y: 1056 },
   { id: 'baciflora', text: 'BACIFLORA 1AMP PO TID', type: nodeTypes.TREATMENT, x: -130, y: 1070 },
@@ -238,13 +238,16 @@ export const flowSequence = [
   // Step 12: Lung Effects
   { nodes: ['respiratoryAlkalosis'], connections: [['lungs', 'respiratoryAlkalosis']] },
   
-  // Step 13: All Treatment Nodes (except comorbidities and bpLow which were shown earlier)
-  { nodes: ['metoclopramide', 'baciflora', 'pnss', 'norepinephrine', 'ceftriaxone', 'fluidHydration', 'nahco3', 'kcl'], connections: [
-    ['vomiting', 'metoclopramide'],
-    ['lbm', 'baciflora'],
-    ['crea', 'fluidHydration'],
+  // Step 13-20: Treatment Nodes shown one by one
+  { nodes: ['metoclopramide'], connections: [['vomiting', 'metoclopramide']] },
+  { nodes: ['baciflora'], connections: [['lbm', 'baciflora']] },
+  { nodes: ['pnss'], connections: [] }, // pnss has no connections - positioned at side
+  { nodes: ['norepinephrine'], connections: [] }, // norepinephrine has no connections - positioned at side
+  { nodes: ['ceftriaxone'], connections: [] }, // ceftriaxone has no connections
+  { nodes: ['fluidHydration'], connections: [['crea', 'fluidHydration']] },
+  { nodes: ['nahco3'], connections: [
     ['fluidHydration', 'nahco3'],
     ['hypokalemia', 'nahco3'],
-    ['k', 'kcl'],
   ]},
+  { nodes: ['kcl'], connections: [['k', 'kcl']] },
 ];

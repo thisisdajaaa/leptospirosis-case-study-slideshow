@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaExternalLinkAlt } from 'react-icons/fa';
 
 const NavigationControls = ({
   onPrevious,
@@ -58,21 +58,25 @@ const NavigationControls = ({
             Use <kbd className="px-2.5 py-1 bg-slate-800/70 border border-slate-700/50 rounded-md text-slate-300 font-mono text-xs">←</kbd> / <kbd className="px-2.5 py-1 bg-slate-800/70 border border-slate-700/50 rounded-md text-slate-300 font-mono text-xs">→</kbd> arrows or <kbd className="px-2.5 py-1 bg-slate-800/70 border border-slate-700/50 rounded-md text-slate-300 font-mono text-xs">Space</kbd> to navigate
           </div>
 
-          <button
-            onClick={onNext}
-            disabled={isLastStep}
-            className={`
-              flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm
-              transition-all duration-300 transform
-              ${isLastStep
-                ? 'bg-slate-800/50 text-slate-600 cursor-not-allowed border border-slate-700/30'
-                : 'bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-xl border border-amber-500/50 hover:border-amber-400/50'
-              }
-            `}
-          >
-            Next
-            <FaChevronRight className="text-xs" />
-          </button>
+          {isLastStep ? (
+            <a
+              href="https://www.canva.com/design/DAG91fG060E/6ZLej6c8dZr8hvIpTwhh6g/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-500 hover:to-blue-400 hover:scale-105 active:scale-95 shadow-xl border border-blue-500/50 hover:border-blue-400/50 transition-all duration-300 transform"
+            >
+              Back to Presentation
+              <FaExternalLinkAlt className="text-xs" />
+            </a>
+          ) : (
+            <button
+              onClick={onNext}
+              className="flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-amber-600 to-amber-500 text-white hover:from-amber-500 hover:to-amber-400 hover:scale-105 active:scale-95 shadow-xl border border-amber-500/50 hover:border-amber-400/50 transition-all duration-300 transform"
+            >
+              Next
+              <FaChevronRight className="text-xs" />
+            </button>
+          )}
         </div>
       </div>
     </div>
