@@ -117,18 +117,18 @@ const ConceptMapSlideshow = () => {
               : (isActive 
                 ? '2px solid rgba(251, 191, 36, 0.8)' 
                 : '1px solid rgba(255, 255, 255, 0.1)'),
-            borderRadius: '12px',
-            padding: '12px 16px',
-            minWidth: '110px',
-            maxWidth: '240px',
-            fontSize: '12px',
+            borderRadius: '10px',
+            padding: '10px 14px',
+            minWidth: '80px',
+            maxWidth: '220px',
+            fontSize: '13px',
             fontWeight: '600',
             boxShadow: isPlain 
               ? 'none' 
               : (isActive
                 ? '0 0 30px rgba(251, 191, 36, 0.4)'
                 : '0 4px 12px rgba(0, 0, 0, 0.3)'),
-            opacity: isActive ? 1 : 0.7,
+            opacity: 1,
           },
         };
       });
@@ -228,10 +228,10 @@ const ConceptMapSlideshow = () => {
     
     return (
       <motion.div
-        className={`rounded-xl px-4 py-3 text-xs font-semibold ${isPlain ? '' : 'border backdrop-blur-sm'} relative flex items-center justify-center text-center`}
+        className={`rounded-lg px-3 py-2 text-xs font-semibold ${isPlain ? '' : 'border backdrop-blur-sm'} relative flex items-center justify-center text-center`}
         style={{
-          minWidth: '110px',
-          maxWidth: '240px',
+          minWidth: '80px',
+          maxWidth: '220px',
           wordBreak: 'break-word',
           lineHeight: '1.5',
           whiteSpace: 'normal',
@@ -239,8 +239,8 @@ const ConceptMapSlideshow = () => {
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{
-          opacity: isActive ? 1 : 0.7,
-          scale: isActive ? 1.05 : 1,
+          opacity: 1,
+          scale: 1,
         }}
         transition={{
           duration: 0.4,
@@ -374,37 +374,24 @@ const ConceptMapSlideshow = () => {
     });
   }, [reactFlowNodes, centerX, centerY]);
 
-  // Auto-fit view to active nodes - properly centered
-  const FitViewOnActiveNodes = () => {
+  // Auto-fit view - fit all revealed nodes
+  const FitViewOnChange = () => {
     const { fitView } = useReactFlow();
-    
+
     useEffect(() => {
-      if (activeNodeIds.length > 0) {
-        const nodeIds = activeNodeIds.filter(id => revealedNodes.has(id));
-        if (nodeIds.length > 0) {
-          setTimeout(() => {
-            fitView({ 
-              nodes: nodeIds.map(id => ({ id })),
-              padding: 0.4,
-              duration: 800,
-              includeHiddenNodes: false,
-              minZoom: 0.3,
-              maxZoom: 2,
-            });
-          }, 150);
-        } else if (revealedNodes.size > 0) {
-          // If no active nodes but we have revealed nodes, fit to all revealed nodes
-          setTimeout(() => {
-            fitView({ 
-              padding: 0.3,
-              duration: 800,
-              includeHiddenNodes: false,
-            });
-          }, 150);
-        }
+      if (revealedNodes.size > 0) {
+        setTimeout(() => {
+          fitView({
+            padding: 0.02,
+            duration: 800,
+            includeHiddenNodes: false,
+            minZoom: 0.4,
+            maxZoom: 2,
+          });
+        }, 150);
       }
-    }, [activeNodeIds, revealedNodes, fitView]);
-    
+    }, [revealedNodes, fitView]);
+
     return null;
   };
 
@@ -429,14 +416,14 @@ const ConceptMapSlideshow = () => {
           onEdgesChange={onEdgesChange}
           onlyRenderVisibleElements={false}
           fitView={reactFlowNodes.length > 0}
-          fitViewOptions={{ 
-            padding: 0.3,
+          fitViewOptions={{
+            padding: 0.02,
             includeHiddenNodes: false,
-            minZoom: 0.3,
+            minZoom: 0.4,
             maxZoom: 2,
           }}
           defaultViewport={{ x: 0, y: 0, zoom: 1 }}
-          minZoom={0.3}
+          minZoom={0.4}
           maxZoom={2}
           nodesDraggable={true}
           nodesConnectable={false}
@@ -458,7 +445,7 @@ const ConceptMapSlideshow = () => {
               },
             }}
           />
-          <FitViewOnActiveNodes />
+          <FitViewOnChange />
           
           {/* Step Indicator */}
           <Panel position="top-left" className="bg-slate-900/90 backdrop-blur-md text-white px-5 py-3 rounded-xl shadow-2xl border border-slate-700/50">

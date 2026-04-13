@@ -2,17 +2,23 @@ import { useState, useEffect, useCallback } from 'react';
 import { flowSequence } from '../data/conceptMap';
 
 const useSlideshow = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(flowSequence.length - 1);
   const [revealedNodes, setRevealedNodes] = useState(new Set());
   const [revealedConnections, setRevealedConnections] = useState(new Set());
   const [activeNodeIds, setActiveNodeIds] = useState([]);
 
-  // Initialize first step
+  // Initialize with all nodes revealed
   useEffect(() => {
     if (flowSequence.length > 0) {
-      const firstStep = flowSequence[0];
-      setRevealedNodes(new Set(firstStep.nodes));
-      setActiveNodeIds(firstStep.nodes);
+      const allNodes = new Set();
+      const allConnections = new Set();
+      flowSequence.forEach(step => {
+        step.nodes.forEach(id => allNodes.add(id));
+        step.connections.forEach(([from, to]) => allConnections.add(`${from}-${to}`));
+      });
+      setRevealedNodes(allNodes);
+      setRevealedConnections(allConnections);
+      setActiveNodeIds(flowSequence[flowSequence.length - 1].nodes);
     }
   }, []);
 
